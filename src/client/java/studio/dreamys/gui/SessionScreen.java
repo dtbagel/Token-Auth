@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.session.Session;
+import net.minecraft.client.session.Session.AccountType;
 import net.minecraft.text.Text;
 import studio.dreamys.TokenAuth;
 
@@ -144,7 +145,7 @@ public class SessionScreen extends Screen {
                                 finalToken,
                                 Optional.empty(),                   // xuid
                                 Optional.empty(),                   // clientId
-                                Session.AccountType.MSA
+                                AccountType.MSA
                         );
                         setSessionViaReflection(client, newSession);
                         status = "§aLogged in as: " + name;
@@ -180,7 +181,7 @@ public class SessionScreen extends Screen {
                     s[2],                                                           // accessToken
                     s[3].isEmpty() ? Optional.empty() : Optional.of(s[3]),         // xuid
                     s[4].isEmpty() ? Optional.empty() : Optional.of(s[4]),         // clientId
-                    Session.AccountType.MSA                                        // accountType
+                    AccountType.MSA                                                // accountType
             );
             setSessionViaReflection(MinecraftClient.getInstance(), restored);
             status = "§aRestored session: " + s[0];
