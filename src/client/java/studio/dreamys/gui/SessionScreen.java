@@ -21,7 +21,7 @@ import java.util.UUID;
 
 /**
  * A custom screen that lets the player enter a new Minecraft access token
- * to swap their in-game session -- or restore the original session.
+ * to swap their in-game session — or restore the original session.
  *
  * Ported from TokenAuth (studio.dreamys, Forge 1.12.x) → Fabric 1.21.10.
  * Uses Yarn mappings (1.21.10+build.2).
@@ -58,7 +58,7 @@ public class SessionScreen extends Screen {
                 btn -> attemptLogin()
         ).position(this.width / 2 - 154, this.height / 2 + 16).size(100, 20).build());
 
-        // Copy Token button -- copies the current session's access token to clipboard
+        // Copy Token button — copies the current session's access token to clipboard
         this.addDrawableChild(ButtonWidget.builder(
                 Text.literal("Copy Token"),
                 btn -> copyCurrentToken()
@@ -207,7 +207,7 @@ public class SessionScreen extends Screen {
 
     /**
      * Injects a new {@link Session} into MinecraftClient's private {@code session} field.
-     * Yarn mapping: MinecraftClient#session (net.minecraft.client.session.Session)
+     * Yarn mapping: MinecraftClient#session (net.minecraft.session.Session)
      */
     private static void setSessionViaReflection(MinecraftClient client, Session session)
             throws NoSuchFieldException, IllegalAccessException {
