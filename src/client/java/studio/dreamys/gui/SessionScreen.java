@@ -208,10 +208,15 @@ public class SessionScreen extends Screen {
      * Yarn mapping: MinecraftClient#session (net.minecraft.session.Session)
      */
     private static void setSessionViaReflection(MinecraftClient client, Session session)
-            throws NoSuchFieldException, IllegalAccessException {
-        Field f = MinecraftClient.class.getDeclaredField("session");
-        f.setAccessible(true);
-        f.set(client, session);
+            throws Exception {
+        for (Field f : MinecraftClient.class.getDeclaredFields()) {
+            if (f.getType() == Session.class) {
+                f.setAccessible(true);
+                f.set(client, session);
+                return;
+            }
+        }
+        throw new NoSuchFieldException("Could not find session field by type");
     }
 
     // ── Rendering ────────────────────────────────────────────────────────────
