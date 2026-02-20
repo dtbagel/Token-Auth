@@ -1,5 +1,3 @@
-Here it is:
-
 package studio.dreamys.gui;
 
 import com.google.gson.JsonObject;
