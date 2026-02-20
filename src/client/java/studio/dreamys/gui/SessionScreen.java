@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.session.Session;
-import net.minecraft.client.session.Session.AccountType;
 import net.minecraft.text.Text;
 import studio.dreamys.TokenAuth;
 
@@ -22,7 +21,7 @@ import java.util.UUID;
 
 /**
  * A custom screen that lets the player enter a new Minecraft access token
- * to swap their in-game session — or restore the original session.
+ * to swap their in-game session -- or restore the original session.
  *
  * Ported from TokenAuth (studio.dreamys, Forge 1.12.x) → Fabric 1.21.10.
  * Uses Yarn mappings (1.21.10+build.2).
@@ -59,7 +58,7 @@ public class SessionScreen extends Screen {
                 btn -> attemptLogin()
         ).position(this.width / 2 - 154, this.height / 2 + 16).size(100, 20).build());
 
-        // Copy Token button — copies the current session's access token to clipboard
+        // Copy Token button -- copies the current session's access token to clipboard
         this.addDrawableChild(ButtonWidget.builder(
                 Text.literal("Copy Token"),
                 btn -> copyCurrentToken()
@@ -144,8 +143,7 @@ public class SessionScreen extends Screen {
                                 UUID.fromString(formattedUuid),
                                 finalToken,
                                 Optional.empty(),                   // xuid
-                                Optional.empty(),                   // clientId
-                                AccountType.MSA
+                                Optional.empty()                    // clientId
                         );
                         setSessionViaReflection(client, newSession);
                         status = "§aLogged in as: " + name;
@@ -177,11 +175,10 @@ public class SessionScreen extends Screen {
             String[] s = TokenAuth.originalSession;
             Session restored = new Session(
                     s[0],                                                           // username
-                    s[1].isEmpty() ? new UUID(0, 0) : UUID.fromString(s[1]),       // uuid
+                    s[1].isEmpty() ? new UUID(0, 0) : UUID.fromString(s[1]),        // uuid
                     s[2],                                                           // accessToken
-                    s[3].isEmpty() ? Optional.empty() : Optional.of(s[3]),         // xuid
-                    s[4].isEmpty() ? Optional.empty() : Optional.of(s[4]),         // clientId
-                    AccountType.MSA                                                // accountType
+                    s[3].isEmpty() ? Optional.empty() : Optional.of(s[3]),          // xuid
+                    s[4].isEmpty() ? Optional.empty() : Optional.of(s[4])           // clientId
             );
             setSessionViaReflection(MinecraftClient.getInstance(), restored);
             status = "§aRestored session: " + s[0];
