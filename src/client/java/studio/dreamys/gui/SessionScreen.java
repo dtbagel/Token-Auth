@@ -218,8 +218,6 @@ public class SessionScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        // Translucent background
-        this.renderBackground(context, mouseX, mouseY, delta);
 
         // Title
         context.drawCenteredTextWithShadow(this.textRenderer, this.title,
